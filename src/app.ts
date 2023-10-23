@@ -1,23 +1,33 @@
-class Expense {
-  account: string;
-  details: string;
-  amount: number;
+import { Expense } from './classes/expense.js';
+import { Income } from './classes/income.js';
+import { hasFormatter } from './interfaces/hasFormatter.js';
 
-  constructor(c: string, d: string, a: number) {
-    this.account = c;
-    this.details = d;
-    this.amount = a;
-  }
+// let docOne: hasFormatter;
+// let docTwo: hasFormatter;
 
-  format() {
-    return `${this.account} is receiving ${this.amount} for ${this.details}`
-  }
-}
+// docOne = new Expense('o2', 'internet and phone bill', 50);
+// docTwo = new Income('coding', 'work', 2700);
 
-const expenseOne = new Expense('The mortgage', 'The flat', 1250);
+// let docs: hasFormatter[] = [];
 
-console.log(expenseOne);
-let expenses: Expense[] = [];
+// docs.push(docOne);
+// docs.push(docTwo);
+
+// console.log(docs);
+
+// const expenseOne = new Expense('The mortgage', 'the flat', 1250);
+// const expensetwo = new Expense('Account', 'savings', 600);
+
+// //console.log(expenseOne);
+// let expenses: Expense[] = [];
+
+// expenses.push(expenseOne);
+// expenses.push(expensetwo);
+
+// console.log(expenses);
+// expenses.forEach(exp => {
+//   console.log(exp.account, exp.details, exp.amount, exp.format());
+// });
 
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 // console.log(form.children);
@@ -30,10 +40,13 @@ const amount = document.querySelector('#amount') as HTMLInputElement;
 form.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
-  console.log(
-    type.value,
-    tofrom.value,
-    details.value,
-    amount.valueAsNumber
-  )
+  let doc: hasFormatter;
+
+  if (type.value === 'Income') {
+    doc = new Income(tofrom.value, details.value, amount.valueAsNumber);
+  } else {
+    doc = new Expense(tofrom.value, details.value, amount.valueAsNumber);
+  }
+
+  console.log(doc);
 });
