@@ -11,11 +11,13 @@ const list = new listTemplate(ul);
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     let doc;
+    let values;
+    values = [tofrom.value, details.value, amount.valueAsNumber];
     if (type.value === 'Income') {
-        doc = new Income(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Income(...values);
     }
     else {
-        doc = new Expense(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Expense(...values);
     }
     list.render(doc, type.value, 'end');
 });

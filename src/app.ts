@@ -18,10 +18,13 @@ form.addEventListener('submit', (e: Event) => {
 
   let doc: hasFormatter;
 
+  let values: [string, string, number];
+  values = [tofrom.value, details.value, amount.valueAsNumber]
+
   if (type.value === 'Income') {
-    doc = new Income(tofrom.value, details.value, amount.valueAsNumber);
+    doc = new Income(...values);
   } else {
-    doc = new Expense(tofrom.value, details.value, amount.valueAsNumber);
+    doc = new Expense(...values);
   }
 
   list.render(doc, type.value, 'end');
